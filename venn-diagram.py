@@ -51,10 +51,10 @@ fig.update_layout(
             type="circle",
             xref="x",
             yref="y",
-            x0=0.3,  # Shifted right by 0.05
-            y0=0.4,
-            x1=0.6,  # Shifted right by 0.05
-            y1=0.7,
+            x0=0.25,  # Adjusted to center horizontally
+            y0=0.35,  # Adjusted to center vertically
+            x1=0.55,  # Adjusted to center horizontally
+            y1=0.65,  # Adjusted to center vertically
             fillcolor='rgba(255, 99, 132, 0.5)',
             line=dict(color='black')
         ),
@@ -63,10 +63,10 @@ fig.update_layout(
             type="circle",
             xref="x",
             yref="y",
-            x0=0.5,  # Shifted right by 0.05
-            y0=0.4,
-            x1=0.8,  # Shifted right by 0.05
-            y1=0.7,
+            x0=0.45,  # Adjusted to center horizontally
+            y0=0.35,  # Adjusted to center vertically
+            x1=0.75,  # Adjusted to center horizontally
+            y1=0.65,  # Adjusted to center vertically
             fillcolor='rgba(54, 162, 235, 0.5)',
             line=dict(color='black')
         ),
@@ -75,10 +75,10 @@ fig.update_layout(
             type="circle",
             xref="x",
             yref="y",
-            x0=0.4,  # Shifted right by 0.05
-            y0=0.2,
-            x1=0.7,  # Shifted right by 0.05
-            y1=0.5,
+            x0=0.35,  # Adjusted to center horizontally
+            y0=0.15,  # Adjusted to center vertically
+            x1=0.65,  # Adjusted to center horizontally
+            y1=0.45,  # Adjusted to center vertically
             fillcolor='rgba(153, 102, 255, 0.5)',
             line=dict(color='black')
         ),
@@ -87,10 +87,10 @@ fig.update_layout(
             type="rect",
             xref="x",
             yref="y",
-            x0=0.85,  # Repositioned to the right
-            y0=0.7,
-            x1=0.875,
-            y1=0.725,
+            x0=0.9,  # Positioned to the upper right with padding
+            y0=0.9,
+            x1=0.925,
+            y1=0.925,
             fillcolor='rgba(255, 99, 132, 0.8)',  # Deterministic Color
             line=dict(width=0)
         ),
@@ -98,10 +98,10 @@ fig.update_layout(
             type="rect",
             xref="x",
             yref="y",
-            x0=0.85,
-            y0=0.65,
-            x1=0.875,
-            y1=0.675,
+            x0=0.9,
+            y0=0.85,
+            x1=0.925,
+            y1=0.875,
             fillcolor='rgba(54, 162, 235, 0.8)',  # Probabilistic Color
             line=dict(width=0)
         ),
@@ -109,21 +109,45 @@ fig.update_layout(
             type="rect",
             xref="x",
             yref="y",
-            x0=0.85,
-            y0=0.6,
-            x1=0.875,
-            y1=0.625,
+            x0=0.9,
+            y0=0.8,
+            x1=0.925,
+            y1=0.825,
             fillcolor='rgba(153, 102, 255, 0.8)',  # Non-Probabilistic Color
             line=dict(width=0)
+        ),
+        # Add border around the legend
+        dict(
+            type="rect",
+            xref="x",
+            yref="y",
+            x0=0.88,  # Slightly left to encompass legend boxes and labels
+            y0=0.78,  # Slightly below to encompass legend boxes and labels
+            x1=1.15,  # Further right to include full labels
+            y1=0.93,  # Slightly above
+            fillcolor='rgba(0,0,0,0)',  # Transparent fill
+            line=dict(color='black', width=1)
         )
     ],
     annotations=[
+        # Add instructions annotation
+        dict(
+            xref="paper",
+            yref="paper",
+            x=0.5,
+            y=-0.1,  # Positioned below the Venn diagram
+            xanchor="center",
+            yanchor="top",
+            text="Interact with the Venn diagram by hovering over the sections.",
+            showarrow=False,
+            font=dict(color="black", size=12)
+        ),
         # Text Labels for Legend
         dict(
             xref="x",
             yref="y",
-            x=0.88,  # Repositioned to align with legend boxes
-            y=0.715,
+            x=0.93,  # Positioned to the right of the legend boxes
+            y=0.9125,
             xanchor="left",
             yanchor="middle",
             text="Deterministic",
@@ -133,8 +157,8 @@ fig.update_layout(
         dict(
             xref="x",
             yref="y",
-            x=0.88,  # Repositioned to align with legend boxes
-            y=0.665,
+            x=0.93,
+            y=0.8625,
             xanchor="left",
             yanchor="middle",
             text="Probabilistic",
@@ -144,15 +168,16 @@ fig.update_layout(
         dict(
             xref="x",
             yref="y",
-            x=0.88,  # Repositioned to align with legend boxes
-            y=0.615,
+            x=0.93,
+            y=0.8125,
             xanchor="left",
             yanchor="middle",
             text="Non-Probabilistic",
             showarrow=False,
             font=dict(color="black", size=12)
         )
-    ]
+    ],
+    margin=dict(l=100, r=100, t=100, b=150)  # Adjusted margins
 )
 
 # Update hover texts without HTML styling
@@ -171,14 +196,14 @@ hover_texts = [
 # Update hover positions to correctly align with overlapping sections
 hover_positions = [
     # Non-Overlapping Positions
-    (0.35, 0.55),   # Deterministic Non-Overlapping
-    (0.7, 0.55),    # Probabilistic Non-Overlapping
-    (0.55, 0.35),   # Non-Probabilistic Non-Overlapping
+    (0.4, 0.5),   # Deterministic Non-Overlapping
+    (0.65, 0.5),  # Probabilistic Non-Overlapping
+    (0.5, 0.3),   # Non-Probabilistic Non-Overlapping
     # Overlapping Positions
-    (0.55, 0.55),   # Deterministic & Probabilistic Overlap
-    (0.45, 0.45),   # Deterministic & Non-Probabilistic Overlap
-    (0.65, 0.45),   # Probabilistic & Non-Probabilistic Overlap
-    (0.55, 0.45)    # All Three Overlap
+    (0.55, 0.5),  # Deterministic & Probabilistic Overlap
+    (0.45, 0.4),  # Deterministic & Non-Probabilistic Overlap
+    (0.6, 0.4),   # Probabilistic & Non-Probabilistic Overlap
+    (0.55, 0.4)   # All Three Overlap
 ]
 
 # Define hover background colors corresponding to each label with darker overlaps
@@ -213,13 +238,13 @@ for (x, y), text, color in zip(hover_positions, hover_texts, hover_colors):
 # Update layout for a clean and interactive look
 fig.update_layout(
     title="Interactive Venn Diagram: Deterministic, Probabilistic, and Non-Probabilistic AI/ML Models",
-    xaxis=dict(showgrid=False, zeroline=False, visible=False, range=[0, 1.2], scaleanchor="y", scaleratio=1),
+    xaxis=dict(showgrid=False, zeroline=False, visible=False, range=[0, 1], scaleanchor="y", scaleratio=1),
     yaxis=dict(showgrid=False, zeroline=False, visible=False, range=[0, 1], scaleanchor="x", scaleratio=1),
     hovermode="closest",
     showlegend=False,
     width=1000,    # Increased width to accommodate legend
     height=900,    # Maintained height for consistency
-    margin=dict(l=100, r=200, t=100, b=100)  # Increased right margin for legend
+    margin=dict(l=100, r=100, t=100, b=150)  # Adjusted margins
 )
 
 fig.show()
